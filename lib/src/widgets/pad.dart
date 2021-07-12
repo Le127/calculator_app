@@ -67,12 +67,15 @@ class _Button extends StatelessWidget {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
 
-    return Expanded(
+    return GestureDetector(
+      onTap: (){print(keyPad);},
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,
+        width: sizeButton.width *0.25,
+    
         decoration: BoxDecoration(
-            color: color, border: Border.all(), shape: BoxShape.circle),
+            color: color, border: Border.all(), ),
         child: Text(this.keyPad),
       ),
     );
