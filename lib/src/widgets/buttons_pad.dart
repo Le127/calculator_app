@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:calculator_app/src/model/expressionModel.dart';
 import 'package:provider/provider.dart';
+
+import 'package:calculator_app/src/models/expressionModel.dart';
+import 'package:calculator_app/src/models/settings_model.dart';
 
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
   final Color color;
-  ButtonDefault(this.keyPad, {this.color = Colors.grey});
+  ButtonDefault(this.keyPad, {required this.color});
 
   @override
   _ButtonDefaultState createState() => _ButtonDefaultState();
@@ -16,6 +18,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -26,10 +30,13 @@ class _ButtonDefaultState extends State<ButtonDefault> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+          borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text(this.widget.keyPad),
+        child:
+            Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -49,6 +56,8 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: expressionModel.evaluate,
@@ -57,10 +66,12 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text("="),
+        child: Text("=", style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -80,6 +91,8 @@ class _ButtonCState extends State<ButtonC> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -90,10 +103,12 @@ class _ButtonCState extends State<ButtonC> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text("C"),
+        child: Text("C", style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -115,6 +130,8 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -128,13 +145,12 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Icon(
-          Icons.backspace_outlined,
-          color: widget.iconColor,
-        ),
+        child: Icon(Icons.backspace_outlined, color: color.textColor),
       ),
     );
   }
