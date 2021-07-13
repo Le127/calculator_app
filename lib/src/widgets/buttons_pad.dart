@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:calculator_app/src/model/expressionModel.dart';
 import 'package:provider/provider.dart';
+
+import 'package:calculator_app/src/models/expressionModel.dart';
+import 'package:calculator_app/src/models/theme_changer_model.dart';
 
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
   final Color color;
-  ButtonDefault(this.keyPad, {this.color = Colors.grey});
+  ButtonDefault(this.keyPad, {required this.color });
 
   @override
   _ButtonDefaultState createState() => _ButtonDefaultState();
@@ -16,6 +18,7 @@ class _ButtonDefaultState extends State<ButtonDefault> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<ThemeChangerModel>(context);
 
     return GestureDetector(
       onTap: () {
@@ -27,7 +30,7 @@ class _ButtonDefaultState extends State<ButtonDefault> {
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
         child: Text(this.widget.keyPad),
       ),
@@ -49,6 +52,7 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<ThemeChangerModel>(context);
 
     return GestureDetector(
       onTap: expressionModel.evaluate,
@@ -58,7 +62,7 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
         child: Text("="),
       ),
@@ -80,6 +84,7 @@ class _ButtonCState extends State<ButtonC> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<ThemeChangerModel>(context);
 
     return GestureDetector(
       onTap: () {
@@ -91,7 +96,7 @@ class _ButtonCState extends State<ButtonC> {
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
         child: Text("C"),
       ),
@@ -115,6 +120,7 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
+    final color = Provider.of<ThemeChangerModel>(context);
 
     return GestureDetector(
       onTap: () {
@@ -129,7 +135,7 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
           color: widget.color,
-          border: Border.all(),
+          border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
         child: Icon(
           Icons.backspace_outlined,

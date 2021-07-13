@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:calculator_app/src/model/expressionModel.dart';
 import 'package:provider/provider.dart';
+
+import 'package:calculator_app/src/models/expressionModel.dart';
+import 'package:calculator_app/src/models/theme_changer_model.dart';
 
 class Display extends StatelessWidget {
   @override
@@ -8,11 +10,12 @@ class Display extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
     final _controller = Provider.of<ExpressionModel>(context).controller;
+    final color = Provider.of<ThemeChangerModel>(context);
 
     return Container(
       height: size.height * 0.2,
       width: size.width,
-      color: Colors.grey.shade800,
+      color: color.backgroundColor,
       child: Center(
         child: TextField(
           autofocus: true,
