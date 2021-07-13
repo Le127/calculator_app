@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:calculator_app/src/models/expressionModel.dart';
-import 'package:calculator_app/src/models/theme_changer_model.dart';
+import 'package:calculator_app/src/models/settings_model.dart';
 
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
@@ -18,7 +18,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
-    final color = Provider.of<ThemeChangerModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -29,6 +30,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+          borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
@@ -53,7 +56,8 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
-    final color = Provider.of<ThemeChangerModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: expressionModel.evaluate,
@@ -62,6 +66,8 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
@@ -85,7 +91,8 @@ class _ButtonCState extends State<ButtonC> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
-    final color = Provider.of<ThemeChangerModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -96,6 +103,8 @@ class _ButtonCState extends State<ButtonC> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
@@ -121,7 +130,8 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
   Widget build(BuildContext context) {
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
-    final color = Provider.of<ThemeChangerModel>(context);
+    final color = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return GestureDetector(
       onTap: () {
@@ -135,13 +145,12 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
+           borderRadius:
+              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Icon(
-          Icons.backspace_outlined,
-          color: color.textColor
-        ),
+        child: Icon(Icons.backspace_outlined, color: color.textColor),
       ),
     );
   }

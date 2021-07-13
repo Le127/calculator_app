@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 
 import 'package:calculator_app/src/pages/calculator_page.dart';
 import 'package:calculator_app/src/models/expressionModel.dart';
-import 'package:calculator_app/src/models/theme_changer_model.dart';
+import 'package:calculator_app/src/models/settings_model.dart';
 
 void main() => runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ExpressionModel()),
-          ChangeNotifierProvider(create: (_) => ThemeChangerModel()),
+          ChangeNotifierProvider(create: (_) => SettingsModel()),
         ],
         child: MyApp(),
       ),

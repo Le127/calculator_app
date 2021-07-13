@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:calculator_app/src/models/theme_changer_model.dart';
+import 'package:calculator_app/src/models/settings_model.dart';
 
 class History extends StatelessWidget {
   const History({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final color = Provider.of<ThemeChangerModel>(context);
+    final color = Provider.of<SettingsModel>(context);
 
     return Container(
       height: size.height * 0.3,
