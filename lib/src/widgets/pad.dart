@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:calculator_app/src/widgets/buttons_pad.dart';
 
 class Pad extends StatelessWidget {
-  const Pad({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -14,69 +13,45 @@ class Pad extends StatelessWidget {
         children: [
           Row(
             children: [
-              _Button("%", color: Colors.orange.withOpacity(0.8)),
-              _Button("CE", color: Colors.orange.withOpacity(0.8)),
-              _Button("C", color: Colors.orange.withOpacity(0.8)),
-              _Button("X", color: Colors.orange.withOpacity(0.8))
+              ButtonDefault("%", color: Colors.orange.withOpacity(0.8)),
+              ButtonDefault("CE", color: Colors.orange.withOpacity(0.8)),
+              ButtonC(color: Colors.orange.withOpacity(0.8)),
+              ButtonBackspace(color: Colors.orange.withOpacity(0.8))
             ],
           ),
           Row(
             children: [
-              _Button("7"),
-              _Button("8"),
-              _Button("9"),
-              _Button("/", color: Colors.orange.withOpacity(0.8))
+              ButtonDefault("7"),
+              ButtonDefault("8"),
+              ButtonDefault("9"),
+              ButtonDefault("/", color: Colors.orange.withOpacity(0.8))
             ],
           ),
           Row(
             children: [
-              _Button("4"),
-              _Button("5"),
-              _Button("6"),
-              _Button("*", color: Colors.orange.withOpacity(0.8))
+              ButtonDefault("4"),
+              ButtonDefault("5"),
+              ButtonDefault("6"),
+              ButtonDefault("*", color: Colors.orange.withOpacity(0.8))
             ],
           ),
           Row(
             children: [
-              _Button("1"),
-              _Button("2"),
-              _Button("3"),
-              _Button("-", color: Colors.orange.withOpacity(0.8))
+              ButtonDefault("1"),
+              ButtonDefault("2"),
+              ButtonDefault("3"),
+              ButtonDefault("-", color: Colors.orange.withOpacity(0.8))
             ],
           ),
           Row(
             children: [
-              _Button("0"),
-              _Button("."),
-              _Button("=", color: Colors.orange),
-              _Button("+", color: Colors.orange.withOpacity(0.8))
+              ButtonDefault("0"),
+              ButtonDefault("."),
+              ButtonEvaluate(color: Colors.orange),
+              ButtonDefault("+", color: Colors.orange.withOpacity(0.8))
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Button extends StatelessWidget {
-  final String keyPad;
-  final Color color;
-  _Button(this.keyPad, {this.color = Colors.grey});
-
-  @override
-  Widget build(BuildContext context) {
-    final sizeButton = MediaQuery.of(context).size;
-
-    return GestureDetector(
-      onTap: (){print(keyPad);},
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width *0.25,
-    
-        decoration: BoxDecoration(
-            color: color, border: Border.all(), ),
-        child: Text(this.keyPad),
       ),
     );
   }
