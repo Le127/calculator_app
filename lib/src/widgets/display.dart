@@ -30,27 +30,37 @@ class _DisplayState extends State<Display> {
     final expressionModel = Provider.of<ExpressionModel>(context);
     final _controller = Provider.of<ExpressionModel>(context).controller;
     final color = Provider.of<SettingsModel>(context);
+    final error = Provider.of<ExpressionModel>(context);
 
     return Container(
       height: size.height * 0.2,
       width: size.width,
       color: color.backgroundColor,
       child: Center(
-        child: TextField(
-          autofocus: true,
-          focusNode: _myFocusNode,
-          controller: _controller,
-          onChanged: (value) {
-            expressionModel.setExpression = value;
-          },
-          onSubmitted: (_) {
-            expressionModel.evaluate();
-            FocusScope.of(context).requestFocus(_myFocusNode);
-          },
-          decoration: InputDecoration.collapsed(hintText: null),
-          textAlign: TextAlign.end,
-          style: TextStyle(
-              fontSize: 35, color: color.textColor, fontWeight: FontWeight.w600),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              autofocus: true,
+              focusNode: _myFocusNode,
+              controller: _controller,
+              onChanged: (value) {
+                expressionModel.setExpression = value;
+              },
+              onSubmitted: (_) {
+                expressionModel.evaluate();
+                FocusScope.of(context).requestFocus(_myFocusNode);
+              },
+              decoration: InputDecoration.collapsed(hintText: null),
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                  fontSize: 35, color: color.textColor, fontWeight: FontWeight.w600),
+            ),
+             Text(
+            error.expressionError ? error.textError : '',
+            style: TextStyle(color: Colors.red),
+          ),
+          ],
         ),
       ),
     );
