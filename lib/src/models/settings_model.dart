@@ -31,7 +31,7 @@ class SettingsModel with ChangeNotifier {
 
   set isOrange(bool value) {
     this._isOrange = value;
-    changeOrange(_isOrange);
+    changeTheme(_isOrange);
     notifyListeners();
   }
 
@@ -54,7 +54,7 @@ class SettingsModel with ChangeNotifier {
     }
   }
 
-  void changeOrange(bool isOrange) {
+  void changeTheme(bool isOrange) {
     if (isOrange) {
       _specialButtonsColor = Colors.orange.withOpacity(0.8);
       _buttonEvaluateColor = Colors.orange;
