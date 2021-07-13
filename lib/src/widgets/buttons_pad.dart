@@ -7,7 +7,7 @@ import 'package:calculator_app/src/models/theme_changer_model.dart';
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
   final Color color;
-  ButtonDefault(this.keyPad, {required this.color });
+  ButtonDefault(this.keyPad, {required this.color});
 
   @override
   _ButtonDefaultState createState() => _ButtonDefaultState();
@@ -32,7 +32,8 @@ class _ButtonDefaultState extends State<ButtonDefault> {
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text(this.widget.keyPad),
+        child:
+            Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -64,7 +65,7 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text("="),
+        child: Text("=", style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -98,7 +99,7 @@ class _ButtonCState extends State<ButtonC> {
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
         ),
-        child: Text("C"),
+        child: Text("C", style: TextStyle(color: color.textColor)),
       ),
     );
   }
@@ -139,7 +140,7 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
         ),
         child: Icon(
           Icons.backspace_outlined,
-          color: widget.iconColor,
+          color: color.textColor
         ),
       ),
     );
