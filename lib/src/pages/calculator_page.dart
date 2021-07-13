@@ -6,11 +6,17 @@ import 'package:calculator_app/src/widgets/history.dart';
 import 'package:calculator_app/src/widgets/pad.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
 
-class CalculatorPage extends StatelessWidget {
+class CalculatorPage extends StatefulWidget {
+  @override
+  _CalculatorPageState createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
+
     return Scaffold(
       body: Column(
         children: [
@@ -23,8 +29,6 @@ class CalculatorPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           hoverElevation: 0.0,
-          /* onPressed: () =>
-            model.isDark ? model.isDark = false : model.isDark = true, */
           onPressed: () => showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -42,10 +46,12 @@ class CalculatorPage extends StatelessWidget {
                         style: TextStyle(color: model.textColor),
                       ),
                       trailing: Switch.adaptive(
-                        value: model.isDark,
-                        activeColor: model.specialButtonsColor,
-                        onChanged: (value) => model.isDark = value,
-                      ),
+                          value: model.isDark,
+                          activeColor: model.specialButtonsColor,
+                          onChanged: (value) {
+                            model.isDark = value;
+                            print(model.isDark);
+                          }),
                     ),
                     ListTile(
                       leading: Icon(Icons.color_lens_outlined,
