@@ -10,6 +10,7 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
+    final isRounded = Provider.of<SettingsModel>(context).isRounded;
     return Scaffold(
       body: Column(
         children: [
@@ -69,23 +70,25 @@ class CalculatorPage extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      leading: Icon(Icons.color_lens_outlined,
+                      leading: Icon(Icons.format_shapes_outlined,
                           color: model.textColor),
                       title: Text(
-                        'Color theme',
+                        'Button shape',
                         style: TextStyle(color: model.textColor),
                       ),
                       trailing: InkWell(
                         onTap: () {
-                          model.isOrange
-                              ? model.isOrange = false
-                              : model.isOrange = true;
+                          isRounded
+                              ? model.isRounded = false
+                              : model.isRounded = true;
                         },
                         child: Container(
                           height: 25.0,
-                          width: 25.0,
+                          width: 35.0,
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                              borderRadius: isRounded
+                                  ? BorderRadius.all(Radius.elliptical(15, 15))
+                                  : null,
                               color: model.buttonEvaluateColor),
                         ),
                       ),
