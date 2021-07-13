@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calculator_app/src/model/expressionModel.dart';
 import 'package:provider/provider.dart';
-import 'package:math_expressions/math_expressions.dart' as me;
 
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
@@ -52,19 +51,7 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final expressionModel = Provider.of<ExpressionModel>(context);
 
     return GestureDetector(
-      onTap: () {
-        try {
-          me.Expression e = me.Parser().parse(expressionModel.expression);
-          double result = e.evaluate(
-            me.EvaluationType.REAL,
-            me.ContextModel(),
-          );
-          expressionModel.setExpression = (result.toString());
-          //_expressionError = false;
-        } catch (error) {
-          //_expressionError = true;
-        }
-      },
+      onTap: expressionModel.evaluate,
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,

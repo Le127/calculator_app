@@ -6,7 +6,7 @@ class Display extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final expressionController = Provider.of<ExpressionModel>(context);
+    final expressionModel = Provider.of<ExpressionModel>(context);
     final _controller = Provider.of<ExpressionModel>(context).controller;
 
     return Container(
@@ -15,10 +15,12 @@ class Display extends StatelessWidget {
       color: Colors.grey.shade800,
       child: Center(
         child: TextField(
+          autofocus: true,
           controller: _controller,
           onChanged: (value) {
-            expressionController.setExpression = value;
+            expressionModel.setExpression = value;
           },
+          onSubmitted: (_) => expressionModel.evaluate(),
           decoration: InputDecoration.collapsed(hintText: null),
           textAlign: TextAlign.end,
           style: TextStyle(
