@@ -6,16 +6,10 @@ import 'package:calculator_app/src/widgets/history.dart';
 import 'package:calculator_app/src/widgets/pad.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
 
-class CalculatorPage extends StatefulWidget {
-  @override
-  _CalculatorPageState createState() => _CalculatorPageState();
-}
-
-class _CalculatorPageState extends State<CalculatorPage> {
+class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
-    final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
     return Scaffold(
       body: Column(
@@ -30,8 +24,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
           elevation: 0.0,
           hoverElevation: 0.0,
           onPressed: () => showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
+              context: context,
+              builder: (context) {
+                final model = Provider.of<SettingsModel>(context);
+                final isRounded = Provider.of<SettingsModel>(context).isRounded;
+
+                return AlertDialog(
                   backgroundColor: model.historyBackgroundColor,
                   actionsPadding: EdgeInsets.symmetric(horizontal: 15),
                   insetPadding: EdgeInsets.symmetric(horizontal: 65),
@@ -50,7 +48,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
                           activeColor: model.specialButtonsColor,
                           onChanged: (value) {
                             model.isDark = value;
-                            print(model.isDark);
                           }),
                     ),
                     ListTile(
@@ -100,8 +97,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
                       ),
                     ),
                   ],
-                ),
-              ),
+                );
+              }),
           child: Icon(
             Icons.settings,
             color: model.textColor,
