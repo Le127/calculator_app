@@ -10,6 +10,7 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
+    
 
     return Scaffold(
       body: Column(

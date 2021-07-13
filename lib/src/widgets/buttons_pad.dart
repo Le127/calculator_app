@@ -66,7 +66,7 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
-           borderRadius:
+          borderRadius:
               isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
@@ -97,13 +97,14 @@ class _ButtonCState extends State<ButtonC> {
     return GestureDetector(
       onTap: () {
         expressionModel.setExpression = "";
+        expressionModel.expressionError = false;
       },
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
-           borderRadius:
+          borderRadius:
               isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),
@@ -139,13 +140,14 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
             ? ""
             : expressionModel.expression
                 .substring(0, expressionModel.expression.length - 1);
+        expressionModel.expressionError = false;
       },
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,
         width: sizeButton.width * 0.25,
         decoration: BoxDecoration(
-           borderRadius:
+          borderRadius:
               isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
           color: widget.color,
           border: Border.all(color: color.backgroundColor, width: 1.0),

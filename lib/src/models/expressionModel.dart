@@ -3,15 +3,18 @@ import 'package:math_expressions/math_expressions.dart' as me;
 
 class ExpressionModel extends ChangeNotifier {
   String _expression = "";
+  bool _expressionError = false;
   TextEditingController _controller = TextEditingController();
+  String _textError = 'Error';
 
   String get expression => this._expression;
+  bool get expressionError => this._expressionError;
   TextEditingController get controller => this._controller;
+  String get textError => this._textError;
 
   set expression(value) {
     this._expression = "${this._expression}$value";
     _controller.text = "${this._controller.text}$value";
-    print(_expression);
     notifyListeners();
   }
 
@@ -19,6 +22,11 @@ class ExpressionModel extends ChangeNotifier {
     _expression = value;
     _controller.text = value;
     _controller.selection = TextSelection.collapsed(offset: value.length);
+  }
+
+  set expressionError(bool value) {
+    _expressionError = value;
+    notifyListeners();
   }
 
   void evaluate() {
@@ -29,9 +37,9 @@ class ExpressionModel extends ChangeNotifier {
         me.ContextModel(),
       );
       setExpression = (result.toString());
-      //_expressionError = false;
+      _expressionError = false;
     } catch (error) {
-      //_expressionError = true;
+      _expressionError = true;
     }
   }
 }
