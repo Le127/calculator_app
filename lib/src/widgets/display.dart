@@ -4,7 +4,26 @@ import 'package:provider/provider.dart';
 import 'package:calculator_app/src/models/expressionModel.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
 
-class Display extends StatelessWidget {
+class Display extends StatefulWidget {
+  @override
+  _DisplayState createState() => _DisplayState();
+}
+
+class _DisplayState extends State<Display> {
+  late FocusNode _myFocusNode;
+
+  @override
+  void initState() {
+    _myFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _myFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -19,15 +38,19 @@ class Display extends StatelessWidget {
       child: Center(
         child: TextField(
           autofocus: true,
+          focusNode: _myFocusNode,
           controller: _controller,
           onChanged: (value) {
             expressionModel.setExpression = value;
           },
-          onSubmitted: (_) => expressionModel.evaluate(),
+          onSubmitted: (_) {
+            expressionModel.evaluate();
+            FocusScope.of(context).requestFocus(_myFocusNode);
+          },
           decoration: InputDecoration.collapsed(hintText: null),
           textAlign: TextAlign.end,
           style: TextStyle(
-              fontSize: 35, color: Colors.white, fontWeight: FontWeight.w600),
+              fontSize: 35, color: color.textColor, fontWeight: FontWeight.w600),
         ),
       ),
     );
