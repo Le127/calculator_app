@@ -62,11 +62,6 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final history = Provider.of<HistoryModel>(context);
 
     return GestureDetector(
-      /*   onTap: () {
-        history.history =
-            "${expressionModel.expression} = ${expressionModel.result()}"; 
-        expressionModel.evaluate();
-      }, */
       onTap: () {
         history.history =
             "${expressionModel.expression} = ${expressionModel.result()}";
