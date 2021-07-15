@@ -5,12 +5,13 @@ import 'package:calculator_app/src/widgets/display.dart';
 import 'package:calculator_app/src/widgets/history.dart';
 import 'package:calculator_app/src/widgets/pad.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
+import 'package:calculator_app/src/models/history_model.dart';
 
 class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
-    
+    final history =Provider.of<HistoryModel>(context);
 
     return Scaffold(
       body: Column(
@@ -20,90 +21,104 @@ class CalculatorPage extends StatelessWidget {
           Pad(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          hoverElevation: 0.0,
-          onPressed: () => showDialog(
-              context: context,
-              builder: (context) {
-                final model = Provider.of<SettingsModel>(context);
-                final isRounded = Provider.of<SettingsModel>(context).isRounded;
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            hoverElevation: 0.0,
+            onPressed: () =>history.delete(),
+            child: Icon(Icons.delete,  color: model.textColor),
+          ),
+          FloatingActionButton(
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+              hoverElevation: 0.0,
+              onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    final model = Provider.of<SettingsModel>(context);
+                    final isRounded =
+                        Provider.of<SettingsModel>(context).isRounded;
 
-                return AlertDialog(
-                  backgroundColor: model.historyBackgroundColor,
-                  actionsPadding: EdgeInsets.symmetric(horizontal: 15),
-                  insetPadding: EdgeInsets.symmetric(horizontal: 65),
-                  title: Text('Settings',
-                      style: TextStyle(color: model.textColor)),
-                  actions: [
-                    ListTile(
-                      leading:
-                          Icon(Icons.lightbulb_outline, color: model.textColor),
-                      title: Text(
-                        'Dark theme',
-                        style: TextStyle(color: model.textColor),
-                      ),
-                      trailing: Switch.adaptive(
-                          value: model.isDark,
-                          activeColor: model.specialButtonsColor,
-                          onChanged: (value) {
-                            model.isDark = value;
-                          }),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.color_lens_outlined,
-                          color: model.textColor),
-                      title: Text(
-                        'Color theme',
-                        style: TextStyle(color: model.textColor),
-                      ),
-                      trailing: InkWell(
-                        onTap: () {
-                          model.isOrange
-                              ? model.isOrange = false
-                              : model.isOrange = true;
-                        },
-                        child: Container(
-                          height: 25.0,
-                          width: 25.0,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: model.buttonEvaluateColor),
+                    return AlertDialog(
+                      backgroundColor: model.historyBackgroundColor,
+                      actionsPadding: EdgeInsets.symmetric(horizontal: 15),
+                      insetPadding: EdgeInsets.symmetric(horizontal: 65),
+                      title: Text('Settings',
+                          style: TextStyle(color: model.textColor)),
+                      actions: [
+                        ListTile(
+                          leading: Icon(Icons.lightbulb_outline,
+                              color: model.textColor),
+                          title: Text(
+                            'Dark theme',
+                            style: TextStyle(color: model.textColor),
+                          ),
+                          trailing: Switch.adaptive(
+                              value: model.isDark,
+                              activeColor: model.specialButtonsColor,
+                              onChanged: (value) {
+                                model.isDark = value;
+                              }),
                         ),
-                      ),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.format_shapes_outlined,
-                          color: model.textColor),
-                      title: Text(
-                        'Button shape',
-                        style: TextStyle(color: model.textColor),
-                      ),
-                      trailing: InkWell(
-                        onTap: () {
-                          isRounded
-                              ? model.isRounded = false
-                              : model.isRounded = true;
-                        },
-                        child: Container(
-                          height: 25.0,
-                          width: 35.0,
-                          decoration: BoxDecoration(
-                              borderRadius: isRounded
-                                  ? BorderRadius.all(Radius.elliptical(15, 15))
-                                  : null,
-                              color: model.buttonEvaluateColor),
+                        ListTile(
+                          leading: Icon(Icons.color_lens_outlined,
+                              color: model.textColor),
+                          title: Text(
+                            'Color theme',
+                            style: TextStyle(color: model.textColor),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {
+                              model.isOrange
+                                  ? model.isOrange = false
+                                  : model.isOrange = true;
+                            },
+                            child: Container(
+                              height: 25.0,
+                              width: 25.0,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: model.buttonEvaluateColor),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              }),
-          child: Icon(
-            Icons.settings,
-            color: model.textColor,
-          )),
+                        ListTile(
+                          leading: Icon(Icons.format_shapes_outlined,
+                              color: model.textColor),
+                          title: Text(
+                            'Button shape',
+                            style: TextStyle(color: model.textColor),
+                          ),
+                          trailing: InkWell(
+                            onTap: () {
+                              isRounded
+                                  ? model.isRounded = false
+                                  : model.isRounded = true;
+                            },
+                            child: Container(
+                              height: 25.0,
+                              width: 35.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: isRounded
+                                      ? BorderRadius.all(
+                                          Radius.elliptical(15, 15))
+                                      : null,
+                                  color: model.buttonEvaluateColor),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+              child: Icon(
+                Icons.settings,
+                color: model.textColor,
+              )),
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
