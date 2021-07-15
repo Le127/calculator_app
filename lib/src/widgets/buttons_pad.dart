@@ -59,13 +59,19 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final expressionModel = Provider.of<ExpressionModel>(context);
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
-    final history =Provider.of<HistoryModel>(context);
+    final history = Provider.of<HistoryModel>(context);
 
     return GestureDetector(
-      onTap:(){ 
-        history.history = "${expressionModel.expression} = ${expressionModel.result()}";
+      /*   onTap: () {
+        history.history =
+            "${expressionModel.expression} = ${expressionModel.result()}"; 
         expressionModel.evaluate();
-        },
+      }, */
+      onTap: () {
+        history.history =
+            "${expressionModel.expression} = ${expressionModel.result()}";
+        expressionModel.evaluate();
+      },
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,
