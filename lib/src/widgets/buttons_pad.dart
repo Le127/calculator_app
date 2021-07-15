@@ -55,29 +55,42 @@ class ButtonEvaluate extends StatefulWidget {
 class _ButtonEvaluateState extends State<ButtonEvaluate> {
   @override
   Widget build(BuildContext context) {
+    Color hoverColor = widget.color;
     final sizeButton = MediaQuery.of(context).size;
     final expressionModel = Provider.of<ExpressionModel>(context);
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
     final history = Provider.of<HistoryModel>(context);
 
-    return GestureDetector(
-      onTap: () {
-        history.history =
-            "${expressionModel.expression} = ${expressionModel.result()}";
-        expressionModel.evaluate();
-      },
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width * 0.25,
-        decoration: BoxDecoration(
-          borderRadius:
-              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
-          color: widget.color,
-          border: Border.all(color: color.backgroundColor, width: 1.0),
+    return Material(
+      color: Colors.transparent,
+      elevation: 30,
+      child: InkWell(
+        hoverColor: Colors.green,
+        onHover: (value) {
+          setState(() {
+            value ? hoverColor = Colors.red : hoverColor = Colors.green;
+          });
+          print({value, hoverColor});
+        },
+        mouseCursor: SystemMouseCursors.basic,
+        onTap: () {
+          history.history =
+              "${expressionModel.expression} = ${expressionModel.result()}";
+          expressionModel.evaluate();
+        },
+        child: Container(
+          alignment: Alignment.center,
+          height: sizeButton.height * 0.1,
+          width: sizeButton.width * 0.25,
+          decoration: BoxDecoration(
+            borderRadius:
+                isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
+            color: hoverColor,
+            border: Border.all(color: color.backgroundColor, width: 1.0),
+          ),
+          child: Text("=", style: TextStyle(color: color.textColor)),
         ),
-        child: Text("=", style: TextStyle(color: color.textColor)),
       ),
     );
   }
