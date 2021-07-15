@@ -11,15 +11,25 @@ class History extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final color = Provider.of<SettingsModel>(context);
-    final history =Provider.of<HistoryModel>(context).history.reversed;
+    final history = Provider.of<HistoryModel>(context).history.reversed;
 
     return Container(
+      padding: EdgeInsets.only(top: 50.0),
       height: size.height * 0.3,
       width: size.width,
       color: color.historyBackgroundColor,
-      child: ListView(children: [
-        ...history.map((e) => Column(children: [Text(e)],))
-      ],),
+      child: ListView(
+        reverse: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          ...history.map((e) => Column(
+                children: [
+                  Text(e),
+                  SizedBox(height: 10.0),
+                ],
+              )),
+        ],
+      ),
     );
   }
 }
