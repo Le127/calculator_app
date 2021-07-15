@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:calculator_app/src/models/expressionModel.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
+import 'package:calculator_app/src/models/history_model.dart';
 
 class Display extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _DisplayState extends State<Display> {
     final _controller = Provider.of<ExpressionModel>(context).controller;
     final color = Provider.of<SettingsModel>(context);
     final error = Provider.of<ExpressionModel>(context);
+    final history =Provider.of<HistoryModel>(context);
 
     return Container(
       height: size.height * 0.2,
@@ -48,6 +50,7 @@ class _DisplayState extends State<Display> {
                 expressionModel.setExpression = value;
               },
               onSubmitted: (_) {
+                history.history = "${expressionModel.expression} = ${expressionModel.result()}";
                 expressionModel.evaluate();
                 FocusScope.of(context).requestFocus(_myFocusNode);
               },

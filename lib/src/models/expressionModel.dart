@@ -42,4 +42,13 @@ class ExpressionModel extends ChangeNotifier {
       _expressionError = true;
     }
   }
+
+  String result() {
+    me.Expression e = me.Parser().parse(this._expression);
+    double result = e.evaluate(
+      me.EvaluationType.REAL,
+      me.ContextModel(),
+    );
+    return (result.toString());
+  }
 }

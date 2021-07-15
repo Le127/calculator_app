@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:calculator_app/src/models/expressionModel.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
+import 'package:calculator_app/src/models/history_model.dart';
 
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
@@ -58,9 +59,19 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final expressionModel = Provider.of<ExpressionModel>(context);
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
+    final history = Provider.of<HistoryModel>(context);
 
     return GestureDetector(
-      onTap: expressionModel.evaluate,
+      /*   onTap: () {
+        history.history =
+            "${expressionModel.expression} = ${expressionModel.result()}"; 
+        expressionModel.evaluate();
+      }, */
+      onTap: () {
+        history.history =
+            "${expressionModel.expression} = ${expressionModel.result()}";
+        expressionModel.evaluate();
+      },
       child: Container(
         alignment: Alignment.center,
         height: sizeButton.height * 0.1,
