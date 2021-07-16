@@ -18,42 +18,59 @@ class Pad extends StatelessWidget {
         children: [
           Row(
             children: [
-              ButtonDefault("%", color: color.specialButtonsColor),
-              ButtonDefault("CE", color: color.specialButtonsColor),
+              ButtonDefault("%",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial),
+              ButtonDefault("CE",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial),
               ButtonC(color: color.specialButtonsColor),
               ButtonBackspace(color: color.specialButtonsColor)
             ],
           ),
           Row(
             children: [
-              ButtonDefault("7", color: color.buttonDefaultColor),
-              ButtonDefault("8", color: color.buttonDefaultColor),
-              ButtonDefault("9", color: color.buttonDefaultColor),
-              ButtonDefault("/", color: color.specialButtonsColor)
+              ButtonDefault("7",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("8",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("9",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("/",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial)
             ],
           ),
           Row(
             children: [
-              ButtonDefault("4", color: color.buttonDefaultColor),
-              ButtonDefault("5", color: color.buttonDefaultColor),
-              ButtonDefault("6", color: color.buttonDefaultColor),
-              ButtonDefault("*", color: color.specialButtonsColor)
+              ButtonDefault("4",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("5",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("6",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("*",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial)
             ],
           ),
           Row(
             children: [
-              ButtonDefault("1", color: color.buttonDefaultColor),
-              ButtonDefault("2", color: color.buttonDefaultColor),
-              ButtonDefault("3", color: color.buttonDefaultColor),
-              ButtonDefault("-", color: color.specialButtonsColor)
+              ButtonDefault("1",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("2",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("3",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("-",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial)
             ],
           ),
           Row(
             children: [
-              ButtonDefault("0", color: color.buttonDefaultColor),
-              ButtonDefault(".", color: color.buttonDefaultColor),
+              ButtonDefault("0",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault(".",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
               ButtonEvaluate(color: color.buttonEvaluateColor),
-              ButtonDefault("+", color: color.specialButtonsColor)
+              ButtonDefault("+",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial)
             ],
           ),
         ],
