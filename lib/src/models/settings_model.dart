@@ -10,7 +10,10 @@ class SettingsModel with ChangeNotifier {
   Color _historyBackgroundColor = Colors.amber.shade100;
   Color _buttonDefaultColor = Colors.amber.shade50;
   Color _specialButtonsColor = Colors.orange.withOpacity(0.8);
-  Color _buttonEvaluateColor = Colors.orange;
+  Color _buttonEvaluateColor = Colors.orange.shade600;
+  Color _hoverDefault = Colors.amber.shade100;
+  Color _hoverEvaluate = Colors.orange.shade700;
+  Color _hoverSpecial = Colors.orange;
 
   bool get isDark => this._isDark;
   bool get isOrange => this._isOrange;
@@ -22,6 +25,9 @@ class SettingsModel with ChangeNotifier {
   Color get buttonDefaultColor => this._buttonDefaultColor;
   Color get specialButtonsColor => this._specialButtonsColor;
   Color get buttonEvaluateColor => this._buttonEvaluateColor;
+  Color get hoverDefault => this._hoverDefault;
+  Color get hoverEvaluate => this._hoverEvaluate;
+  Color get hoverSpecial => this._hoverSpecial;
 
   set isDark(bool value) {
     this._isDark = value;
@@ -46,21 +52,27 @@ class SettingsModel with ChangeNotifier {
       _backgroundColor = Colors.grey.shade600;
       _historyBackgroundColor = Colors.grey.shade700;
       _buttonDefaultColor = Colors.grey.shade500;
+      _hoverDefault = Colors.grey.shade600;
     } else {
       _textColor = Colors.black;
       _backgroundColor = Colors.amber.shade200;
       _historyBackgroundColor = Colors.amber.shade100;
       _buttonDefaultColor = Colors.amber.shade50;
+      _hoverDefault = Colors.amber.shade100;
     }
   }
 
   void changeTheme(bool isOrange) {
     if (isOrange) {
       _specialButtonsColor = Colors.orange.withOpacity(0.8);
-      _buttonEvaluateColor = Colors.orange;
+      _buttonEvaluateColor = Colors.orange.shade600;
+      _hoverEvaluate = Colors.orange.shade700;
+      _hoverSpecial = Colors.orange;
     } else {
       _specialButtonsColor = Colors.green.withOpacity(0.8);
-      _buttonEvaluateColor = Colors.green;
+      _buttonEvaluateColor = Colors.green.shade600;
+      _hoverEvaluate = Colors.green.shade700;
+      _hoverSpecial = Colors.green;
     }
   }
 }

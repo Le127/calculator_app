@@ -11,7 +11,7 @@ void main() => runApp(
         providers: [
           ChangeNotifierProvider(create: (_) => ExpressionModel()),
           ChangeNotifierProvider(create: (_) => SettingsModel()),
-           ChangeNotifierProvider(create: (_) => HistoryModel()),
+          ChangeNotifierProvider(create: (_) => HistoryModel()),
         ],
         child: MyApp(),
       ),

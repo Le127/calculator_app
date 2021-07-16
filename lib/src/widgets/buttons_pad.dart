@@ -8,7 +8,9 @@ import 'package:calculator_app/src/models/history_model.dart';
 class ButtonDefault extends StatefulWidget {
   final String keyPad;
   final Color color;
-  ButtonDefault(this.keyPad, {required this.color});
+  final Color hover;
+
+  ButtonDefault(this.keyPad, {required this.color, required this.hover});
 
   @override
   _ButtonDefaultState createState() => _ButtonDefaultState();
@@ -22,23 +24,20 @@ class _ButtonDefaultState extends State<ButtonDefault> {
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(widget.hover),
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: isRounded
+              ? MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)))
+              : null,
+          fixedSize: MaterialStateProperty.all(
+              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
+      onPressed: () {
         expressionModel.expression = widget.keyPad;
       },
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width * 0.25,
-        decoration: BoxDecoration(
-          borderRadius:
-              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
-          color: widget.color,
-          border: Border.all(color: color.backgroundColor, width: 1.0),
-        ),
-        child:
-            Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
-      ),
+      child: Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
     );
   }
 }
@@ -61,24 +60,22 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
     final history = Provider.of<HistoryModel>(context);
 
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(color.hoverEvaluate),
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: isRounded
+              ? MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)))
+              : null,
+          fixedSize: MaterialStateProperty.all(
+              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
+      onPressed: () {
         history.history =
             "${expressionModel.expression} = ${expressionModel.result()}";
         expressionModel.evaluate();
       },
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width * 0.25,
-        decoration: BoxDecoration(
-          borderRadius:
-              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
-          color: widget.color,
-          border: Border.all(color: color.backgroundColor, width: 1.0),
-        ),
-        child: Text("=", style: TextStyle(color: color.textColor)),
-      ),
+      child: Text("=", style: TextStyle(color: color.textColor)),
     );
   }
 }
@@ -100,23 +97,21 @@ class _ButtonCState extends State<ButtonC> {
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(color.hoverSpecial),
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: isRounded
+              ? MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)))
+              : null,
+          fixedSize: MaterialStateProperty.all(
+              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
+      onPressed: () {
         expressionModel.setExpression = "";
         expressionModel.expressionError = false;
       },
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width * 0.25,
-        decoration: BoxDecoration(
-          borderRadius:
-              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
-          color: widget.color,
-          border: Border.all(color: color.backgroundColor, width: 1.0),
-        ),
-        child: Text("C", style: TextStyle(color: color.textColor)),
-      ),
+      child: Text("C", style: TextStyle(color: color.textColor)),
     );
   }
 }
@@ -140,26 +135,24 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
-    return GestureDetector(
-      onTap: () {
+    return ElevatedButton(
+      style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(color.hoverSpecial),
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: isRounded
+              ? MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)))
+              : null,
+          fixedSize: MaterialStateProperty.all(
+              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
+      onPressed: () {
         expressionModel.setExpression = expressionModel.expression.isEmpty
             ? ""
             : expressionModel.expression
                 .substring(0, expressionModel.expression.length - 1);
         expressionModel.expressionError = false;
       },
-      child: Container(
-        alignment: Alignment.center,
-        height: sizeButton.height * 0.1,
-        width: sizeButton.width * 0.25,
-        decoration: BoxDecoration(
-          borderRadius:
-              isRounded ? BorderRadius.all(Radius.elliptical(15, 15)) : null,
-          color: widget.color,
-          border: Border.all(color: color.backgroundColor, width: 1.0),
-        ),
-        child: Icon(Icons.backspace_outlined, color: color.textColor),
-      ),
+      child: Icon(Icons.backspace_outlined, color: color.textColor),
     );
   }
 }
