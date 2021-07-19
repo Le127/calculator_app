@@ -22,7 +22,13 @@ class History extends StatelessWidget {
         children: [
           ...history.map((e) => Column(
                 children: [
-                  Text(e),
+                  Text(
+                    e,
+                    style: TextStyle(
+                        color: color.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300),
+                  ),
                   SizedBox(height: 10.0),
                 ],
               )),
