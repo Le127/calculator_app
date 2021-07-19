@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:calculator_app/src/pages/calculator_page.dart';
-import 'package:calculator_app/src/models/expressionModel.dart';
+import 'package:calculator_app/src/models/expression_model.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
 import 'package:calculator_app/src/models/history_model.dart';
 

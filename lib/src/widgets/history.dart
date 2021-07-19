@@ -5,8 +5,6 @@ import 'package:calculator_app/src/models/settings_model.dart';
 import 'package:calculator_app/src/models/history_model.dart';
 
 class History extends StatelessWidget {
-  const History({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
