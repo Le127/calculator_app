@@ -1,23 +1,17 @@
+import 'package:calculator_app/src/helpers/functions.dart';
 import 'package:flutter/material.dart';
 
 class HistoryModel with ChangeNotifier {
-  List _history = [];
-  String _result = '';
+  List<String> _history = [];
 
-  List get history => _history;
-  String get result => _result;
+  List<String> get history => _history;
 
   set history(value) {
-    _history.add(value);
+    _history.add(removeZeroDecimal(value));
     notifyListeners();
   }
 
-  set result (value) {
-    _result= value;
-    notifyListeners();
-  }
-
-  void delete (){
+  void delete() {
     _history = [];
     notifyListeners();
   }
