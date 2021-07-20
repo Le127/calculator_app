@@ -1,4 +1,3 @@
-import 'package:calculator_app/src/helpers/functions.dart';
 import 'package:flutter/material.dart';
 
 class HistoryModel with ChangeNotifier {
@@ -7,7 +6,8 @@ class HistoryModel with ChangeNotifier {
   List<String> get history => _history;
 
   set history(value) {
-    _history.add(removeZeroDecimal(value));
+    if (value != '')
+    _history.add(value);
     notifyListeners();
   }
 

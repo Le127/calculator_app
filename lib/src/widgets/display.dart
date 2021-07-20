@@ -36,12 +36,11 @@ class _DisplayState extends State<Display> {
     final history = Provider.of<HistoryModel>(context);
     bool readOnly = false;
 
-    if(Platform.isAndroid || Platform.isIOS){
+    if (Platform.isAndroid || Platform.isIOS) {
       readOnly = true;
     } else {
       readOnly = false;
     }
-   
 
     return Container(
       height: size.height * 0.2,
@@ -60,9 +59,13 @@ class _DisplayState extends State<Display> {
                 expressionModel.setExpression = value;
               },
               onSubmitted: (_) {
-                history.history =
-                    "${expressionModel.expression} = ${expressionModel.result()}";
+                expressionModel.result() != 'Error'
+                    ? history.history =
+                        "${expressionModel.expression} = ${expressionModel.result()}"
+                    : history.history = '';
+
                 expressionModel.evaluate();
+
                 FocusScope.of(context).requestFocus(_myFocusNode);
               },
               decoration: InputDecoration.collapsed(hintText: null),

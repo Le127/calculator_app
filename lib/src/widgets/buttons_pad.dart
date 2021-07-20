@@ -71,8 +71,10 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
           fixedSize: MaterialStateProperty.all(
               Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
       onPressed: () {
-        history.history =
-            "${expressionModel.expression} = ${expressionModel.result()}";
+          expressionModel.result() != 'Error'
+                    ? history.history =
+                        "${expressionModel.expression} = ${expressionModel.result()}"
+                    : history.history = '';
         expressionModel.evaluate();
       },
       child: Text("=", style: TextStyle(color: color.textColor)),

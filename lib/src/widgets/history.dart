@@ -10,6 +10,7 @@ class History extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final color = Provider.of<SettingsModel>(context);
     final history = Provider.of<HistoryModel>(context).history.reversed;
+    
 
     return Container(
       padding: EdgeInsets.only(top: 50.0),
