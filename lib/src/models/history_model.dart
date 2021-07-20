@@ -6,8 +6,9 @@ class HistoryModel with ChangeNotifier {
   List<String> get history => _history;
 
   set history(value) {
-    if (value != '')
-    _history.add(value);
+    if (value != '' ) {
+      _history.add(value);
+    }
     notifyListeners();
   }
 
