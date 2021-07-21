@@ -13,7 +13,7 @@ class History extends StatelessWidget {
     
 
     return Container(
-      padding: EdgeInsets.only(top: 50.0),
+      padding: EdgeInsets.only(top: 65.0),
       height: size.height * 0.3,
       width: size.width,
       color: color.historyBackgroundColor,

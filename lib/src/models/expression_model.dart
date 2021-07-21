@@ -14,32 +14,32 @@ class ExpressionModel extends ChangeNotifier {
   TextEditingController get controller => this._controller;
   String get textError => this._textError;
 
-  set expression(value) {
-    // permite continuar un calculo o comienza uno nuevo
-    if (!_wasEvaluate) {
-      this._expression = "${this._expression}$value";
-      _controller.text = "${this._controller.text}$value";
-    } else if (_wasEvaluate && value == '*' ||
-        value == '/' ||
-        value == '-' ||
-        value == '+' ||
-        value == '%') {
-      _wasEvaluate = false;
-      this._expression = "${this._expression}$value";
-      _controller.text = "${this._controller.text}$value";
-    } else {
-      _wasEvaluate = false;
-      _controller.clear();
-      this._expression = "${this._expression}$value";
-      _controller.text = "${this._controller.text}$value";
-    }
-    notifyListeners();
+  void addToExpression(String value) {
+    this.expression = _buildNewExpression(value);
+    _wasEvaluate = false;
   }
 
-  set setExpression(String value) {
+  String _buildNewExpression(String value) {
+    // permite continuar un calculo o comienza uno nuevo
+    if (!_wasEvaluate) {
+      return "${this._expression}$value";
+    } else if (_wasEvaluate &&
+        (value == '*' ||
+            value == '/' ||
+            value == '-' ||
+            value == '+' ||
+            value == '%')) {
+      return "${this._expression}$value";
+    } else {
+      return value;
+    }
+  }
+
+  set expression(String value) {
     _expression = value;
     _controller.text = value;
     _controller.selection = TextSelection.collapsed(offset: value.length);
+    notifyListeners();
   }
 
   set expressionError(bool value) {
@@ -54,7 +54,7 @@ class ExpressionModel extends ChangeNotifier {
         me.EvaluationType.REAL,
         me.ContextModel(),
       );
-      setExpression = removeZeroDecimal(result.toString());
+      this.expression = removeZeroDecimal(result.toString());
       _wasEvaluate = true;
       _expressionError = false;
     } catch (error) {

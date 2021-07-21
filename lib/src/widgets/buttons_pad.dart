@@ -35,7 +35,7 @@ class _ButtonDefaultState extends State<ButtonDefault> {
           fixedSize: MaterialStateProperty.all(
               Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
       onPressed: () {
-        expressionModel.expression = widget.keyPad;
+        expressionModel.addToExpression(widget.keyPad);
       },
       child: Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
     );
@@ -71,10 +71,11 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
           fixedSize: MaterialStateProperty.all(
               Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
       onPressed: () {
-          expressionModel.result() != 'Error'
-                    ? history.history =
-                        "${expressionModel.expression} = ${expressionModel.result()}"
-                    : history.history = '';
+        expressionModel.result() != 'Error'
+            ? history.history =
+                "${expressionModel.expression} = ${expressionModel.result()}"
+            : history.history = '';
+            
         expressionModel.evaluate();
       },
       child: Text("=", style: TextStyle(color: color.textColor)),
@@ -110,7 +111,7 @@ class _ButtonCState extends State<ButtonC> {
           fixedSize: MaterialStateProperty.all(
               Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
       onPressed: () {
-        expressionModel.setExpression = "";
+        expressionModel.expression = "";
         expressionModel.expressionError = false;
       },
       child: Text("C", style: TextStyle(color: color.textColor)),
@@ -148,7 +149,7 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
           fixedSize: MaterialStateProperty.all(
               Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
       onPressed: () {
-        expressionModel.setExpression = expressionModel.expression.isEmpty
+        expressionModel.expression = expressionModel.expression.isEmpty
             ? ""
             : expressionModel.expression
                 .substring(0, expressionModel.expression.length - 1);
