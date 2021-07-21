@@ -10,6 +10,7 @@ class History extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final color = Provider.of<SettingsModel>(context);
     final history = Provider.of<HistoryModel>(context).history.reversed;
+    
 
     return Container(
       padding: EdgeInsets.only(top: 50.0),
@@ -22,7 +23,13 @@ class History extends StatelessWidget {
         children: [
           ...history.map((e) => Column(
                 children: [
-                  Text(e),
+                  Text(
+                    e,
+                    style: TextStyle(
+                        color: color.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300),
+                  ),
                   SizedBox(height: 10.0),
                 ],
               )),

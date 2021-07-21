@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io' show Platform;
 
 import 'package:calculator_app/src/models/expression_model.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
@@ -32,7 +33,14 @@ class _DisplayState extends State<Display> {
     final _controller = Provider.of<ExpressionModel>(context).controller;
     final color = Provider.of<SettingsModel>(context);
     final error = Provider.of<ExpressionModel>(context);
-    final history =Provider.of<HistoryModel>(context);
+    final history = Provider.of<HistoryModel>(context);
+    bool readOnly = false;
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      readOnly = true;
+    } else {
+      readOnly = false;
+    }
 
     return Container(
       height: size.height * 0.2,
@@ -43,26 +51,37 @@ class _DisplayState extends State<Display> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              readOnly: readOnly,
               autofocus: true,
               focusNode: _myFocusNode,
               controller: _controller,
-              onChanged: (value) {
+             /*  onChanged: (value) {
+                print( _controller);
+               
                 expressionModel.setExpression = value;
-              },
+              }, */
               onSubmitted: (_) {
-                history.history = "${expressionModel.expression} = ${expressionModel.result()}";
-                expressionModel.evaluate();
                 FocusScope.of(context).requestFocus(_myFocusNode);
+                expressionModel.result() != 'Error'
+                    ? history.history =
+                        "${expressionModel.expression} = ${expressionModel.result()}"
+                    : history.history = '';
+
+                expressionModel.evaluate();
+
+                
               },
               decoration: InputDecoration.collapsed(hintText: null),
               textAlign: TextAlign.end,
               style: TextStyle(
-                  fontSize: 35, color: color.textColor, fontWeight: FontWeight.w600),
+                  fontSize: 35,
+                  color: color.textColor,
+                  fontWeight: FontWeight.w600),
             ),
-             Text(
-            error.expressionError ? error.textError : '',
-            style: TextStyle(color: Colors.red),
-          ),
+            Text(
+              error.expressionError ? error.textError : '',
+              style: TextStyle(color: Colors.red),
+            ),
           ],
         ),
       ),
