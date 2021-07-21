@@ -55,10 +55,13 @@ class _DisplayState extends State<Display> {
               autofocus: true,
               focusNode: _myFocusNode,
               controller: _controller,
-              onChanged: (value) {
+             /*  onChanged: (value) {
+                print( _controller);
+               
                 expressionModel.setExpression = value;
-              },
+              }, */
               onSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_myFocusNode);
                 expressionModel.result() != 'Error'
                     ? history.history =
                         "${expressionModel.expression} = ${expressionModel.result()}"
@@ -66,7 +69,7 @@ class _DisplayState extends State<Display> {
 
                 expressionModel.evaluate();
 
-                FocusScope.of(context).requestFocus(_myFocusNode);
+                
               },
               decoration: InputDecoration.collapsed(hintText: null),
               textAlign: TextAlign.end,
