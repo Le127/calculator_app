@@ -11,7 +11,7 @@ class CalculatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
-    final history =Provider.of<HistoryModel>(context);
+    final history = Provider.of<HistoryModel>(context);
 
     return Scaffold(
       body: Column(
@@ -26,14 +26,18 @@ class CalculatorPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             backgroundColor: Colors.transparent,
+            highlightElevation: 0.0,
+            splashColor: model.buttonEvaluateColor,
             elevation: 0.0,
             hoverElevation: 0.0,
-            onPressed: () =>history.delete(),
-            child: Icon(Icons.delete,  color: model.textColor),
+            onPressed: () => history.delete(),
+            child: Icon(Icons.delete, color: model.textColor),
           ),
           FloatingActionButton(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
+              highlightElevation: 0.0,
+              splashColor: model.buttonEvaluateColor,
               hoverElevation: 0.0,
               onPressed: () => showDialog(
                   context: context,

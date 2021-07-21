@@ -31,13 +31,13 @@ class SettingsModel with ChangeNotifier {
 
   set isDark(bool value) {
     this._isDark = value;
-    changeColors(_isDark);
+    _changeColors(_isDark);
     notifyListeners();
   }
 
   set isOrange(bool value) {
     this._isOrange = value;
-    changeTheme(_isOrange);
+    _changeTheme(_isOrange);
     notifyListeners();
   }
 
@@ -46,7 +46,7 @@ class SettingsModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void changeColors(bool isDark) {
+  void _changeColors(bool isDark) {
     if (isDark) {
       _textColor = Colors.white;
       _backgroundColor = Colors.grey.shade600;
@@ -62,7 +62,7 @@ class SettingsModel with ChangeNotifier {
     }
   }
 
-  void changeTheme(bool isOrange) {
+  void _changeTheme(bool isOrange) {
     if (isOrange) {
       _specialButtonsColor = Colors.orange.withOpacity(0.8);
       _buttonEvaluateColor = Colors.orange.shade600;
