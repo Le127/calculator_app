@@ -29,6 +29,7 @@ class ExpressionModel extends ChangeNotifier {
       _controller.text = "${this._controller.text}$value";
     } else {
       _wasEvaluate = false;
+      _expression = '';
       _controller.clear();
       this._expression = "${this._expression}$value";
       _controller.text = "${this._controller.text}$value";
