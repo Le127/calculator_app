@@ -28,7 +28,7 @@ class ExpressionModel extends ChangeNotifier {
             value == '/' ||
             value == '-' ||
             value == '+' ||
-            value == '%')) {
+            value == '^')) {
       return "${this._expression}$value";
     } else {
       return value;

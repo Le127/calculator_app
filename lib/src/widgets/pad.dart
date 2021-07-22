@@ -18,11 +18,12 @@ class Pad extends StatelessWidget {
         children: [
           Row(
             children: [
-              ButtonDefault("%",
+              ButtonDefault("(",
                   color: color.specialButtonsColor, hover: color.hoverSpecial),
-              ButtonDefault("CE",
+              ButtonDefault(")",
                   color: color.specialButtonsColor, hover: color.hoverSpecial),
-              ButtonC(color: color.specialButtonsColor),
+              ButtonDefault("^",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial),
               ButtonBackspace(color: color.specialButtonsColor)
             ],
           ),
