@@ -65,13 +65,13 @@ class SettingsModel with ChangeNotifier {
   void _changeTheme(bool isOrange) {
     if (isOrange) {
       _specialButtonsColor = Colors.orange.withOpacity(0.8);
-      _buttonEvaluateColor = Colors.orange.shade600;
-      _hoverEvaluate = Colors.orange.shade700;
+      _buttonEvaluateColor = Colors.orange.shade800;
+      _hoverEvaluate = Colors.orange.shade900;
       _hoverSpecial = Colors.orange;
     } else {
       _specialButtonsColor = Colors.green.withOpacity(0.8);
-      _buttonEvaluateColor = Colors.green.shade600;
-      _hoverEvaluate = Colors.green.shade700;
+      _buttonEvaluateColor = Colors.green.shade800;
+      _hoverEvaluate = Colors.green.shade900;
       _hoverSpecial = Colors.green;
     }
   }

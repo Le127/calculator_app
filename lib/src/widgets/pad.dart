@@ -18,11 +18,12 @@ class Pad extends StatelessWidget {
         children: [
           Row(
             children: [
-              ButtonDefault("%",
+              ButtonDefault("(",
                   color: color.specialButtonsColor, hover: color.hoverSpecial),
-              ButtonDefault("CE",
+              ButtonDefault(")",
                   color: color.specialButtonsColor, hover: color.hoverSpecial),
-              ButtonC(color: color.specialButtonsColor),
+              ButtonDefault("^",
+                  color: color.specialButtonsColor, hover: color.hoverSpecial),
               ButtonBackspace(color: color.specialButtonsColor)
             ],
           ),
@@ -64,9 +65,9 @@ class Pad extends StatelessWidget {
           ),
           Row(
             children: [
-              ButtonDefault("0",
-                  color: color.buttonDefaultColor, hover: color.hoverDefault),
               ButtonDefault(".",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("0",
                   color: color.buttonDefaultColor, hover: color.hoverDefault),
               ButtonEvaluate(color: color.buttonEvaluateColor),
               ButtonDefault("+",

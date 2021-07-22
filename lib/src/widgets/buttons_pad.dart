@@ -24,8 +24,12 @@ class _ButtonDefaultState extends State<ButtonDefault> {
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
-    return ElevatedButton(
-      style: ButtonStyle(
+    return Container(
+      margin: EdgeInsets.all(1.5),
+      child: ElevatedButton(
+        style: ButtonStyle(
+          splashFactory: NoSplash.splashFactory,
+          elevation: MaterialStateProperty.all(7),
           overlayColor: MaterialStateProperty.all(widget.hover),
           backgroundColor: MaterialStateProperty.all(widget.color),
           shape: isRounded
@@ -33,11 +37,16 @@ class _ButtonDefaultState extends State<ButtonDefault> {
                   borderRadius: BorderRadius.circular(20)))
               : null,
           fixedSize: MaterialStateProperty.all(
-              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
-      onPressed: () {
-        expressionModel.addToExpression(widget.keyPad);
-      },
-      child: Text(this.widget.keyPad, style: TextStyle(color: color.textColor)),
+              Size(sizeButton.width * 0.25 - 3, sizeButton.height * 0.1 - 3)),
+        ),
+        onPressed: () {
+          expressionModel.addToExpression(widget.keyPad);
+        },
+        child: Text(
+          this.widget.keyPad,
+          style: TextStyle(color: color.textColor, fontSize: 28),
+        ),
+      ),
     );
   }
 }
@@ -60,61 +69,30 @@ class _ButtonEvaluateState extends State<ButtonEvaluate> {
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
     final history = Provider.of<HistoryModel>(context);
 
-    return ElevatedButton(
-      style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(color.hoverEvaluate),
-          backgroundColor: MaterialStateProperty.all(widget.color),
-          shape: isRounded
-              ? MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)))
-              : null,
-          fixedSize: MaterialStateProperty.all(
-              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
-      onPressed: () {
-        expressionModel.result() != 'Error'
-            ? history.history =
-                "${expressionModel.expression} = ${expressionModel.result()}"
-            : history.history = '';
-            
-        expressionModel.evaluate();
-      },
-      child: Text("=", style: TextStyle(color: color.textColor)),
-    );
-  }
-}
+    return Container(
+      margin: EdgeInsets.all(1.5),
+      child: ElevatedButton(
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(7),
+            overlayColor: MaterialStateProperty.all(color.hoverEvaluate),
+            backgroundColor: MaterialStateProperty.all(widget.color),
+            shape: isRounded
+                ? MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)))
+                : null,
+            fixedSize: MaterialStateProperty.all(Size(
+                sizeButton.width * 0.25 - 3, sizeButton.height * 0.1 - 3))),
+        onPressed: () {
+          expressionModel.result() != 'Error'
+              ? history.history =
+                  "${expressionModel.expression} = ${expressionModel.result()}"
+              : history.history = '';
 
-//---------------------------------------
-class ButtonC extends StatefulWidget {
-  final Color color;
-  ButtonC({this.color = Colors.grey});
-
-  @override
-  _ButtonCState createState() => _ButtonCState();
-}
-
-class _ButtonCState extends State<ButtonC> {
-  @override
-  Widget build(BuildContext context) {
-    final sizeButton = MediaQuery.of(context).size;
-    final expressionModel = Provider.of<ExpressionModel>(context);
-    final color = Provider.of<SettingsModel>(context);
-    final isRounded = Provider.of<SettingsModel>(context).isRounded;
-
-    return ElevatedButton(
-      style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(color.hoverSpecial),
-          backgroundColor: MaterialStateProperty.all(widget.color),
-          shape: isRounded
-              ? MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)))
-              : null,
-          fixedSize: MaterialStateProperty.all(
-              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
-      onPressed: () {
-        expressionModel.expression = "";
-        expressionModel.expressionError = false;
-      },
-      child: Text("C", style: TextStyle(color: color.textColor)),
+          expressionModel.evaluate();
+        },
+        child:
+            Text("=", style: TextStyle(color: color.textColor, fontSize: 25)),
+      ),
     );
   }
 }
@@ -138,24 +116,36 @@ class _ButtonBackspaceState extends State<ButtonBackspace> {
     final color = Provider.of<SettingsModel>(context);
     final isRounded = Provider.of<SettingsModel>(context).isRounded;
 
-    return ElevatedButton(
-      style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(color.hoverSpecial),
-          backgroundColor: MaterialStateProperty.all(widget.color),
-          shape: isRounded
-              ? MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)))
-              : null,
-          fixedSize: MaterialStateProperty.all(
-              Size(sizeButton.width * 0.25, sizeButton.height * 0.1))),
-      onPressed: () {
-        expressionModel.expression = expressionModel.expression.isEmpty
-            ? ""
-            : expressionModel.expression
-                .substring(0, expressionModel.expression.length - 1);
-        expressionModel.expressionError = false;
-      },
-      child: Icon(Icons.backspace_outlined, color: color.textColor),
+    return Container(
+      margin: EdgeInsets.all(1.5),
+      child: ElevatedButton(
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(7),
+            overlayColor: MaterialStateProperty.all(color.hoverSpecial),
+            backgroundColor: MaterialStateProperty.all(widget.color),
+            shape: isRounded
+                ? MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)))
+                : null,
+            fixedSize: MaterialStateProperty.all(Size(
+                sizeButton.width * 0.25 - 3, sizeButton.height * 0.1 - 3))),
+        onPressed: () {
+          expressionModel.expression = expressionModel.expression.isEmpty
+              ? ""
+              : expressionModel.expression
+                  .substring(0, expressionModel.expression.length - 1);
+          expressionModel.expressionError = false;
+        },
+        onLongPress: () {
+          expressionModel.expression = "";
+          expressionModel.expressionError = false;
+        },
+        child: Icon(
+          Icons.backspace_outlined,
+          color: color.hoverEvaluate,
+          size: 30,
+        ),
+      ),
     );
   }
 }
