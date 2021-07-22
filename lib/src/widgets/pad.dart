@@ -65,9 +65,9 @@ class Pad extends StatelessWidget {
           ),
           Row(
             children: [
-              ButtonDefault("0",
-                  color: color.buttonDefaultColor, hover: color.hoverDefault),
               ButtonDefault(".",
+                  color: color.buttonDefaultColor, hover: color.hoverDefault),
+              ButtonDefault("0",
                   color: color.buttonDefaultColor, hover: color.hoverDefault),
               ButtonEvaluate(color: color.buttonEvaluateColor),
               ButtonDefault("+",
