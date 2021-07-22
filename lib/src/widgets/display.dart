@@ -55,11 +55,11 @@ class _DisplayState extends State<Display> {
               autofocus: true,
               focusNode: _myFocusNode,
               controller: _controller,
-             /*  onChanged: (value) {
-                print( _controller);
-               
-                expressionModel.setExpression = value;
-              }, */
+              onChanged: (String value) {
+                //Se obtiene el ultimo char del String value
+                String lastChar = value[value.length-1];
+              expressionModel.addToExpression(lastChar);
+              },
               onSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_myFocusNode);
                 expressionModel.result() != 'Error'
@@ -68,8 +68,6 @@ class _DisplayState extends State<Display> {
                     : history.history = '';
 
                 expressionModel.evaluate();
-
-                
               },
               decoration: InputDecoration.collapsed(hintText: null),
               textAlign: TextAlign.end,
