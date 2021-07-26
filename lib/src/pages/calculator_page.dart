@@ -1,3 +1,4 @@
+// import 'package:calculator_app/src/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +8,12 @@ import 'package:calculator_app/src/widgets/pad.dart';
 import 'package:calculator_app/src/models/settings_model.dart';
 import 'package:calculator_app/src/models/history_model.dart';
 
-class CalculatorPage extends StatelessWidget {
+class CalculatorPage extends StatefulWidget {
+  @override
+  _CalculatorPageState createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<SettingsModel>(context);
@@ -63,8 +69,8 @@ class CalculatorPage extends StatelessWidget {
                           trailing: Switch.adaptive(
                               value: model.isDark,
                               activeColor: model.specialButtonsColor,
-                              onChanged: (value) {
-                                model.isDark = value;
+                              onChanged: (value) async {
+                                await model.toggleChangeTheme(value);
                               }),
                         ),
                         ListTile(
@@ -76,9 +82,7 @@ class CalculatorPage extends StatelessWidget {
                           ),
                           trailing: InkWell(
                             onTap: () {
-                              model.isOrange
-                                  ? model.isOrange = false
-                                  : model.isOrange = true;
+                              model.toggleChangeColor();
                             },
                             child: Container(
                               height: 25.0,
@@ -98,9 +102,7 @@ class CalculatorPage extends StatelessWidget {
                           ),
                           trailing: InkWell(
                             onTap: () {
-                              isRounded
-                                  ? model.isRounded = false
-                                  : model.isRounded = true;
+                              model.toggleChangeRounded();
                             },
                             child: Container(
                               height: 25.0,
