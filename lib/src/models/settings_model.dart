@@ -1,9 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel with ChangeNotifier {
-  bool _isDark = false;
-  bool _isOrange = true;
-  bool _isRounded = false;
+  final String keyTheme = "theme";
+  final String keyRounded = "rounded";
+  final String keyColor = "color";
+
+  late SharedPreferences _preferences;
+
+  late bool _isDark;
+  late bool _isOrange;
+  late bool _isRounded;
+
+  SettingsModel() {
+    _isDark = false;
+    _isRounded = false;
+    _isOrange = true;
+    _loadFromPreferences();
+  }
+
+  Future<SharedPreferences> _initialPreferences() async =>
+      _preferences = await SharedPreferences.getInstance();
+
+  void _savePreferences() async {
+    await _initialPreferences();
+    _preferences.setBool(keyTheme, _isDark);
+    _preferences.setBool(keyRounded, _isRounded);
+    _preferences.setBool(keyColor, _isOrange);
+  }
+
+  void _loadFromPreferences() async {
+    await _initialPreferences();
+    isDark = _preferences.getBool(keyTheme) ?? false;
+    isRounded = _preferences.getBool(keyRounded) ?? false;
+    isOrange = _preferences.getBool(keyColor) ?? true;
+    notifyListeners();
+  }
+
+  toggleChangeTheme(bool value) {
+    isDark = value;
+    _savePreferences();
+    notifyListeners();
+  }
+
+  void toggleChangeRounded() {
+    isRounded = !_isRounded;
+    _savePreferences();
+    notifyListeners();
+  }
+
+  void toggleChangeColor() {
+    isOrange = !_isOrange;
+    _savePreferences();
+    notifyListeners();
+  }
 
   Color _textColor = Colors.black;
   Color _backgroundColor = Colors.amber.shade200;
@@ -18,6 +68,8 @@ class SettingsModel with ChangeNotifier {
   bool get isDark => this._isDark;
   bool get isOrange => this._isOrange;
   bool get isRounded => this._isRounded;
+
+  Future get initialPreferences => this._initialPreferences();
 
   Color get textColor => this._textColor;
   Color get backgroundColor => this._backgroundColor;
