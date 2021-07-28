@@ -14,8 +14,8 @@ class SettingsModel with ChangeNotifier {
 
   SettingsModel() {
     _isDark = false;
-    _isRounded = false;
     _isOrange = true;
+    _isRounded = false;
     _loadFromPreferences();
   }
 
@@ -35,6 +35,12 @@ class SettingsModel with ChangeNotifier {
     isRounded = _preferences.getBool(keyRounded) ?? false;
     isOrange = _preferences.getBool(keyColor) ?? true;
     notifyListeners();
+  }
+
+  void clearPreferences() async {
+    await _initialPreferences();
+    await _preferences.clear();
+    _loadFromPreferences();
   }
 
   toggleChangeTheme(bool value) {
@@ -68,8 +74,6 @@ class SettingsModel with ChangeNotifier {
   bool get isDark => this._isDark;
   bool get isOrange => this._isOrange;
   bool get isRounded => this._isRounded;
-
-  Future get initialPreferences => this._initialPreferences();
 
   Color get textColor => this._textColor;
   Color get backgroundColor => this._backgroundColor;
