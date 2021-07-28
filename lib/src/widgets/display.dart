@@ -72,10 +72,12 @@ class _DisplayState extends State<Display> {
                 decoration: TextDecoration.none,
               ),
               onChanged: (String value) {
-                //Se obtiene el ultimo char del String value
-                if (value.length > 0) {
+                if (expressionModel.expression ==
+                    value.substring(0, value.length - 1)) {
                   String lastChar = value[value.length - 1];
                   expressionModel.addToExpression(lastChar);
+                } else {
+                  expressionModel.expression = value;
                 }
               },
               onSubmitted: (_) {

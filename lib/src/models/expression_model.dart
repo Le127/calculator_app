@@ -39,6 +39,7 @@ class ExpressionModel extends ChangeNotifier {
     _expression = value;
     _controller.text = value;
     _controller.selection = TextSelection.collapsed(offset: value.length);
+    _wasEvaluate = false;
     notifyListeners();
   }
 
