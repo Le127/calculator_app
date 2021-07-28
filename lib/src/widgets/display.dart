@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'dart:io' show Platform;
 
@@ -51,14 +52,31 @@ class _DisplayState extends State<Display> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              cursorWidth: 0,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
               readOnly: readOnly,
               autofocus: true,
               focusNode: _myFocusNode,
               controller: _controller,
+              decoration: InputDecoration(
+                hintText: null,
+                isCollapsed: true,
+                counterText: "",
+                border: InputBorder.none,
+              ),
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                fontSize: 35,
+                color: color.textColor,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
+              ),
               onChanged: (String value) {
                 //Se obtiene el ultimo char del String value
-                String lastChar = value[value.length-1];
-              expressionModel.addToExpression(lastChar);
+                if (value.length > 0) {
+                  String lastChar = value[value.length - 1];
+                  expressionModel.addToExpression(lastChar);
+                }
               },
               onSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_myFocusNode);
@@ -69,12 +87,6 @@ class _DisplayState extends State<Display> {
 
                 expressionModel.evaluate();
               },
-              decoration: InputDecoration.collapsed(hintText: null),
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                  fontSize: 35,
-                  color: color.textColor,
-                  fontWeight: FontWeight.w600),
             ),
             Text(
               error.expressionError ? error.textError : '',

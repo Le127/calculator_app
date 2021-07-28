@@ -116,6 +116,19 @@ class _CalculatorPageState extends State<CalculatorPage> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 25),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                              elevation: MaterialStateProperty.all(0),
+                            ),
+                            onPressed: () => model.clearPreferences(),
+                            child: Text("Reset",
+                                style: TextStyle(
+                                    color: model.textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15)))
                       ],
                     );
                   }),
