@@ -12,6 +12,7 @@ class SettingsModel with ChangeNotifier {
   late bool _isOrange;
   late bool _isRounded;
 
+  //Default settings
   SettingsModel() {
     _isDark = false;
     _isOrange = true;

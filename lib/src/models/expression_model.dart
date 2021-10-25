@@ -19,8 +19,8 @@ class ExpressionModel extends ChangeNotifier {
     _wasEvaluate = false;
   }
 
+  // Allows you to continue a calculation or start a new one
   String _buildNewExpression(String value) {
-    // permite continuar un calculo o comienza uno nuevo
     if (!_wasEvaluate) {
       return "${this._expression}$value";
     } else if (_wasEvaluate &&
