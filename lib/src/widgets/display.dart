@@ -38,6 +38,7 @@ class _DisplayState extends State<Display> {
     final history = Provider.of<HistoryModel>(context);
     bool readOnly = false;
 
+    // only allows keyboard input from the desktop
     if (Platform.isAndroid || Platform.isIOS) {
       readOnly = true;
     } else {
@@ -60,7 +61,7 @@ class _DisplayState extends State<Display> {
                 expressionModel: expressionModel,
                 history: history),
 
-            //if there is an error in the result, it displays an error message. Otherwise, it returns an empty string.
+            // if there is an error in the result, it displays an error message. Otherwise, it returns an empty string.
             ErrorHandler(error: error),
           ],
         ),
@@ -69,7 +70,6 @@ class _DisplayState extends State<Display> {
   }
 }
 
-//
 //---Useful Widgets---
 
 class InputAndResultViewer extends StatelessWidget {
