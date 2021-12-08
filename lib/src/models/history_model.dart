@@ -7,7 +7,8 @@ class HistoryModel with ChangeNotifier {
 
   set history(value) {
     if (value != '' ) {
-      _history.add(value);
+      _history.insert(0,value);
+      
     }
     notifyListeners();
   }

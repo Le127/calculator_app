@@ -115,8 +115,9 @@ class InputAndResultViewer extends StatelessWidget {
         decoration: TextDecoration.none,
       ),
       onChanged: (String value) {
+        //onChanged only works when entering text from desktop mode
         if (value.isEmpty) {
-         expressionModel.expression = value;
+          expressionModel.expression = value;
           return;
         }
 
