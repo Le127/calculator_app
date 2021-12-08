@@ -95,8 +95,9 @@ class SetupButton extends StatelessWidget {
 
             return AlertDialog(
               backgroundColor: model.historyBackgroundColor,
-              actionsPadding: EdgeInsets.symmetric(horizontal: 15),
-              insetPadding: EdgeInsets.symmetric(horizontal: 65),
+             actionsPadding: EdgeInsets.symmetric(horizontal: 15),
+             insetPadding: EdgeInsets.symmetric(horizontal: 50),
+         
               title: Text('Settings', style: TextStyle(color: model.textColor)),
               actions: [
                 DarkTheme(model: model),
@@ -219,6 +220,7 @@ class DarkTheme extends StatelessWidget {
     return ListTile(
       leading: Icon(Icons.lightbulb_outline, color: model.textColor),
       title: Text(
+      
         'Dark theme',
         style: TextStyle(color: model.textColor),
       ),
