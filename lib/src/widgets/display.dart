@@ -115,6 +115,11 @@ class InputAndResultViewer extends StatelessWidget {
         decoration: TextDecoration.none,
       ),
       onChanged: (String value) {
+        if (value.isEmpty) {
+         expressionModel.expression = value;
+          return;
+        }
+
         if (expressionModel.expression ==
             value.substring(0, value.length - 1)) {
           String lastChar = value[value.length - 1];
